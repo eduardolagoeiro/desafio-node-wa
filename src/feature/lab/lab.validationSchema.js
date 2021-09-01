@@ -8,6 +8,6 @@ module.exports = {
   update: Joi.object().keys({
     name: Joi.string().optional(),
     address: Joi.string().optional(),
-    isActive: Joi.boolean().optional(),
+    status: Joi.string().valid('active', 'inactive'),
   }),
 };
