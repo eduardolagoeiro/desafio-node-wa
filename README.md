@@ -106,7 +106,7 @@ Estamos desenvolvendo uma aplicação para as seguintes situações:
     
   **Importante:**
   - ~~Um exame pode estar associado a mais de um laboratório;~~
-  
+
     Relacionamento muitos para um está feito corretamente
 
   - ~~O cadastro de um laboratório/exame é considerado ativo e recebe um `id` gerado automaticamente.~~ (feito)
@@ -129,7 +129,7 @@ Estamos desenvolvendo uma aplicação para as seguintes situações:
     Porém como era uma funcionalidade requisitada permito a população dos laboratórios e por uma query pelo nome (retornando potencialmente mais de um exame já que não há regra de unicidade no nome do exame)
 
     ```
-    curl -X GET 'https://desafio-node-wa.herokuapp.com/exam?where%5Bname%5D={{NAME}}&populate=labs' \
+    curl -X GET 'https://desafio-node-wa.herokuapp.com/exam?where%5Bname%5D={{NAME}}&populate=labs'
     ```
 
 ## Diferenciais
