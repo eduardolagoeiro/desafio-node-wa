@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const router = require('express').Router();
-const { celebrate, Segments } = require('celebrate');
+const { celebrate, Segments, Joi } = require('celebrate');
 const examSchema = require('./exam.validationSchema');
 const ExamModel = require('./exam.model');
 const ValidationSchema = require('../../helpers/ValidationSchema');
@@ -9,7 +9,8 @@ const LabModel = require('../lab/lab.model');
 
 router.post('/',
   celebrate({
-    [Segments.BODY]: examSchema.create,
+    [Segments.BODY]: Joi.alternatives()
+      .try(examSchema.create, Joi.array().items(examSchema.create).min(1)),
   }), async (req, res, next) => {
     try {
       return res.send(await ExamModel.create(req.body));
@@ -55,6 +56,22 @@ router.patch('/:id',
     }
   });
 
+router.patch('/',
+  celebrate({
+    [Segments.BODY]: ValidationSchema.forbiddenSchema,
+  }),
+  celebrate({
+    [Segments.BODY]: examSchema.update,
+  }),
+  async (req, res, next) => {
+    try {
+      const result = await ExamModel.updateMany(req.body);
+
+      return res.send(result);
+    } catch (error) {
+      return next(error);
+    }
+  });
 
 async function getActiveExam(id) {
   if (!ObjectId.isValid(id)) throw new StatusError('exam not found', 404);
