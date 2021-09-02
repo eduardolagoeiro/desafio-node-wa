@@ -7,6 +7,17 @@ function create(schema, options = {}) {
 
   const s = new Schema(schema, options);
 
+  s.virtual('id').get(function getId() {
+    return this._id.toHexString();
+  });
+
+  s.set('toJSON', {
+    virtuals: true,
+    _id: false,
+    versionKey: false,
+    transform(doc, ret) { delete ret._id; },
+  });
+
   return s;
 }
 
