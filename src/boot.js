@@ -1,5 +1,5 @@
 const db = require('./db');
-const Logger = require('./src/helpers/Logger');
+const Logger = require('./helpers/Logger');
 
 const log = Logger.get('boot');
 

@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const express = require('express');
 const router = require('./router');
 
-const StatusError = require('./src/helpers/StatusError');
+const StatusError = require('./helpers/StatusError');
 
 const app = express();
 
@@ -25,9 +25,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', router);
+app.use(router);
 
-app.use('/api', (req, res, next) => {
+app.use((req, res, next) => {
   next(new StatusError('Not Found', 404));
 });
 
