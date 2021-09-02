@@ -21,7 +21,8 @@ router.post('/',
 
 router.get('/', async (req, res, next) => {
   try {
-    return res.send(await ExamModel.find(req.query));
+    const where = typeof req.query.where === 'object' ? req.query.where : {};
+    return res.send(await ExamModel.find(where).populate(req.query.populate));
   } catch (error) {
     return next(error);
   }

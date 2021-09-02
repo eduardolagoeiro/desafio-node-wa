@@ -20,7 +20,8 @@ router.post('/',
 
 router.get('/', async (req, res, next) => {
   try {
-    return res.send(await LabModel.find(req.query));
+    const where = typeof req.query.where === 'object' ? req.query.where : {};
+    return res.send(await LabModel.find(where));
   } catch (error) {
     return next(error);
   }
