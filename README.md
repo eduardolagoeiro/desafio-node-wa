@@ -2,7 +2,7 @@
 
 ### deployado em:
 
-https://desafio-node-wa.herokuapp.com
+~https://desafio-node-wa.herokuapp.com~ (fora do ar)
 
 ### rodar via docker
 ```
